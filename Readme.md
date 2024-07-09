@@ -27,10 +27,10 @@ This Python script scrapes product listings from eBay, extracting key details li
    ```
 
 ## Project Structure
-    ```bash
+```bash
     .
     ├── __init__.py
     ├── main.py
     ├── Readme.md
     └── requirements.txt
-    ```
+```

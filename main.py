@@ -35,14 +35,15 @@ class Ebay(object):
         
         self._driver.get(self.start_url)
         
+        data = []
+
+        
         try:
             wait = WebDriverWait(self._driver, 3)
             items = wait.until(
                 EC.visibility_of_all_elements_located((By.CLASS_NAME, "s-item"))
             )
-            
-            data = []
-            
+                        
             for i, item in enumerate(items):
                 
                 if i == self.scraping_limit:
