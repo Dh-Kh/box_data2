@@ -41,7 +41,7 @@ class Ebay(object):
         try:
             wait = WebDriverWait(self._driver, 3)
             items = wait.until(
-                EC.visibility_of_all_elements_located((By.CLASS_NAME, "s-item"))
+                EC.visibility_of_all_elements_located((By.CLASS_NAME, "s-item__wrapper clearfix"))
             )
                         
             for i, item in enumerate(items):
@@ -72,12 +72,12 @@ class Ebay(object):
                     price = None
 
                 try:
-                    shipping_price = item.find_element(By.CLASS_NAME, 's-item__shipping').text
+                    shipping_price = item.find_element(By.CLASS_NAME, 's-item__shipping s-item__logisticsCost').text
                 except NoSuchElementException:
                     shipping_price = None
 
                 salesman_info = None
-
+                
                 if title_element:
                     try:
                         title_element.click()
@@ -87,10 +87,9 @@ class Ebay(object):
                             )
                         ).text
                         self._driver.back()
-                        wait.until(EC.visibility_of_all_elements_located((By.CLASS_NAME, "s-item")))
                     except (NoSuchElementException, TimeoutException):
                         salesman_info = None
-
+                
                 data.append({
                     'title': title,
                     'photo_link': photo_link,
